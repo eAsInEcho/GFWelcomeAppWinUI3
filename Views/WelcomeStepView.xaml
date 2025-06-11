@@ -1,0 +1,114 @@
+<UserControl
+    x:Class="GFSetupWizard.App.WinUI3.Views.WelcomeStepView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d">
+    <controls:Grid>
+        <controls:Grid.Background>
+            <SolidColorBrush Color="White"/>
+        </controls:Grid.Background>
+        
+        <!-- Globe image in background -->
+        <controls:Image Source="ms-appx:///Resources/Images/New_GF_icons_Globe_orng.png" 
+               Opacity="0.5" 
+               HorizontalAlignment="Right" 
+               VerticalAlignment="Top" 
+               Width="300" 
+               Height="300" 
+               Margin="0,-50,-50,0"/>
+        
+        <controls:ScrollViewer VerticalScrollBarVisibility="Auto">
+            <controls:Grid Margin="20">
+                <controls:Grid.RowDefinitions>
+                    <controls:RowDefinition Height="Auto"/>
+                    <controls:RowDefinition Height="*"/>
+                </controls:Grid.RowDefinitions>
+                
+                <!-- Header with colon graphic element -->
+                <controls:StackPanel controls:Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,20">
+                    <controls:TextBlock Text="Welcome" 
+                               Style="{StaticResource HeaderTextStyle}"
+                               Margin="0"/>
+                    <controls:Grid Margin="10,0,0,0" VerticalAlignment="Center">
+                        <controls:Grid.RowDefinitions>
+                            <controls:RowDefinition Height="*"/>
+                            <controls:RowDefinition Height="*"/>
+                        </controls:Grid.RowDefinitions>
+                        <controls:Border Width="12" Height="12" Background="{StaticResource GFOrangeBrush}" controls:Grid.Row="0" Margin="0,0,0,2"/>
+                        <controls:Border Width="12" Height="12" Background="{StaticResource GFOrangeBrush}" controls:Grid.Row="1" Margin="0,2,0,0"/>
+                    </controls:Grid>
+                    <controls:TextBlock Text="New Employee Setup" 
+                               Style="{StaticResource HeaderTextStyle}"
+                               Margin="10,0,0,0"/>
+                </controls:StackPanel>
+                
+                <controls:StackPanel controls:Grid.Row="1">
+                    <controls:TextBlock Text="Guide for New Employees" 
+                               Style="{StaticResource SubHeaderTextStyle}"
+                               Foreground="{StaticResource GFOrangeBrush}"/>
+                    
+                    <controls:Border Background="{StaticResource GFYellowBrush}" 
+                            Padding="15" 
+                            Margin="0,0,0,20"
+                            CornerRadius="4">
+                        <controls:TextBlock Style="{StaticResource BodyTextStyle}" Margin="0">
+                            This guide helps you quickly and easily set up your new laptop by logging in to Windows, 
+                            activating Microsoft 365 apps, and requesting VPN access.
+                        </controls:TextBlock>
+                    </controls:Border>
+                    
+                    <controls:TextBlock Text="The wizard will guide you through the following steps:" 
+                               FontWeight="SemiBold" 
+                               Margin="0,10,0,10"/>
+                    
+                    <!-- Steps with colon graphic elements -->
+                    <controls:Grid Margin="0,10,0,20">
+                        <controls:Grid.ColumnDefinitions>
+                            <controls:ColumnDefinition Width="Auto"/>
+                            <controls:ColumnDefinition Width="*"/>
+                        </controls:Grid.ColumnDefinitions>
+                        <controls:Grid.RowDefinitions>
+                            <controls:RowDefinition Height="Auto"/>
+                            <controls:RowDefinition Height="Auto"/>
+                            <controls:RowDefinition Height="Auto"/>
+                            <controls:RowDefinition Height="Auto"/>
+                            <controls:RowDefinition Height="Auto"/>
+                            <controls:RowDefinition Height="Auto"/>
+                        </controls:Grid.RowDefinitions>
+                        
+                        <!-- OneDrive -->
+                        <controls:Border controls:Grid.Row="0" controls:Grid.Column="0" Width="6" Height="20" Background="{StaticResource GFOrangeBrush}" Margin="0,5,0,5"/>
+                        <controls:TextBlock controls:Grid.Row="0" controls:Grid.Column="1" Text="Configure Microsoft OneDrive" Margin="10,5,0,5"/>
+                        
+                        <!-- Outlook -->
+                        <controls:Border controls:Grid.Row="1" controls:Grid.Column="0" Width="6" Height="20" Background="{StaticResource GFOrangeBrush}" Margin="0,5,0,5"/>
+                        <controls:TextBlock controls:Grid.Row="1" controls:Grid.Column="1" Text="Configure Microsoft Outlook" Margin="10,5,0,5"/>
+                        
+                        <!-- Teams -->
+                        <controls:Border controls:Grid.Row="2" controls:Grid.Column="0" Width="6" Height="20" Background="{StaticResource GFOrangeBrush}" Margin="0,5,0,5"/>
+                        <controls:TextBlock controls:Grid.Row="2" controls:Grid.Column="1" Text="Configure Microsoft Teams" Margin="10,5,0,5"/>
+                        
+                        <!-- Edge -->
+                        <controls:Border controls:Grid.Row="3" controls:Grid.Column="0" Width="6" Height="20" Background="{StaticResource GFOrangeBrush}" Margin="0,5,0,5"/>
+                        <controls:TextBlock controls:Grid.Row="3" controls:Grid.Column="1" Text="Configure Microsoft Edge" Margin="10,5,0,5"/>
+                        
+                        <!-- VPN -->
+                        <controls:Border controls:Grid.Row="4" controls:Grid.Column="0" Width="6" Height="20" Background="{StaticResource GFOrangeBrush}" Margin="0,5,0,5"/>
+                        <controls:TextBlock controls:Grid.Row="4" controls:Grid.Column="1" Text="Requesting your SecurID RSA Token for VPN" Margin="10,5,0,5"/>
+                        
+                        <!-- Software -->
+                        <controls:Border controls:Grid.Row="5" controls:Grid.Column="0" Width="6" Height="20" Background="{StaticResource GFOrangeBrush}" Margin="0,5,0,5"/>
+                        <controls:TextBlock controls:Grid.Row="5" controls:Grid.Column="1" Text="Installing additional software" Margin="10,5,0,5"/>
+                    </controls:Grid>
+                    
+                    <controls:TextBlock TextWrapping="Wrap" Margin="0,20,0,0" FontWeight="SemiBold" Foreground="{StaticResource GFOrangeBrush}">
+                        Click <Bold>Next</Bold> to begin the setup process.
+                    </controls:TextBlock>
+                </controls:StackPanel>
+            </controls:Grid>
+        </controls:ScrollViewer>
+    </controls:Grid>
+</UserControl>

@@ -1,0 +1,59 @@
+<Application
+    x:Class="GFSetupWizard.App.WinUI3.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GFSetupWizard.App.WinUI3">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- WinUI resource dictionaries -->
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+                <!-- Other merged dictionaries here -->
+            </ResourceDictionary.MergedDictionaries>
+            <!-- GF Brand Colors -->
+            <SolidColorBrush x:Key="GFOrangeBrush" Color="#FF6012"/>
+            <SolidColorBrush x:Key="GFYellowBrush" Color="#FFD100"/>
+            <SolidColorBrush x:Key="GFLightGreyBrush" Color="#F5F5F5"/>
+            <SolidColorBrush x:Key="GFPurpleBrush" Color="#43007A"/>
+            <SolidColorBrush x:Key="GFEdgeBrush" Color="#47ba47"/>
+            
+            <!-- Maintain original app colors for specific buttons as requested -->
+            <SolidColorBrush x:Key="OutlookBrush" Color="#0078D4"/>
+            <SolidColorBrush x:Key="TeamsBrush" Color="#6264A7"/>
+            <SolidColorBrush x:Key="VpnBrush" Color="#E74C3C"/>
+            <SolidColorBrush x:Key="OnedriveBrush" Color="#54c0ff"/>
+            
+            <!-- Text Styles -->
+            <Style x:Key="HeaderTextStyle" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Arial"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="FontSize" Value="28"/>
+                <Setter Property="Margin" Value="0,0,0,20"/>
+            </Style>
+            
+            <Style x:Key="SubHeaderTextStyle" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Arial"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="Margin" Value="0,0,0,20"/>
+            </Style>
+            
+            <Style x:Key="BodyTextStyle" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Arial"/>
+                <Setter Property="TextWrapping" Value="Wrap"/>
+                <Setter Property="Margin" Value="0,0,0,20"/>
+            </Style>
+            
+            <!-- Button Styles -->
+            <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+                <Setter Property="Background" Value="{StaticResource GFOrangeBrush}"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Padding" Value="15,10"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="Margin" Value="0,0,0,30"/>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

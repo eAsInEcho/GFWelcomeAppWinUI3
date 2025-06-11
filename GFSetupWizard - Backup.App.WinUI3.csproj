@@ -1,0 +1,88 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <RootNamespace>GFSetupWizard.App.WinUI3</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Platforms>AnyCPU</Platforms>
+    <RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
+    <PublishProfile>win10-$(Platform).pubxml</PublishProfile>
+    <UseWinUI>true</UseWinUI>
+    <EnableMsixTooling>true</EnableMsixTooling>
+    <WindowsPackageType>None</WindowsPackageType>
+    <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+    <AssemblyName>GFSetupWizard</AssemblyName>
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>true</SelfContained>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>embedded</DebugType>
+    <EnableDefaultPageItems>false</EnableDefaultPageItems>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.7.250606001" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.4188" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.6" />
+    <PackageReference Include="H.InputSimulator" Version="1.4.0" />
+    <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
+    <PackageReference Include="System.Management" Version="9.0.6" />
+    <Manifest Include="$(ApplicationManifest)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Images\*.png" />
+    <Content Include="Resources\Images\*.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="App.xaml">
+      <Link>WinUI3\App.xaml</Link>
+    </Page>
+    <Page Include="MainWindow.xaml" />
+    <Page Include="Views\WelcomeStepView.xaml" />
+    <Page Include="Views\OneDriveSetupStepView.xaml" />
+    <Page Include="Views\OutlookSetupStepView.xaml" />
+    <Page Include="Views\TeamsSetupStepView.xaml" />
+    <Page Include="Views\EdgeSetupStepView.xaml" />
+    <Page Include="Views\VpnSetupStepView.xaml" />
+    <Page Include="Views\SoftwareSetupStepView.xaml" />
+    <Page Include="Views\FinalSummaryStepView.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\WelcomeStepView.xaml.cs">
+      <DependentUpon>Views\WelcomeStepView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\OneDriveSetupStepView.xaml.cs">
+      <DependentUpon>Views\OneDriveSetupStepView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\OutlookSetupStepView.xaml.cs">
+      <DependentUpon>Views\OutlookSetupStepView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TeamsSetupStepView.xaml.cs">
+      <DependentUpon>Views\TeamsSetupStepView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\EdgeSetupStepView.xaml.cs">
+      <DependentUpon>Views\EdgeSetupStepView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\VpnSetupStepView.xaml.cs">
+      <DependentUpon>Views\VpnSetupStepView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SoftwareSetupStepView.xaml.cs">
+      <DependentUpon>Views\SoftwareSetupStepView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\FinalSummaryStepView.xaml.cs">
+      <DependentUpon>Views\FinalSummaryStepView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>
