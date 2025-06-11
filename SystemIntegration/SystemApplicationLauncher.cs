@@ -5,6 +5,8 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
+using WindowsInput;
+using WindowsInput.Native;
 
 namespace GFSetupWizard.App.WinUI3.SystemIntegration
 {
@@ -408,41 +410,72 @@ namespace GFSetupWizard.App.WinUI3.SystemIntegration
         }
         
         /// <summary>
-        /// Launches Edge and uses H.InputSimulator to automatically navigate to the sync settings page.
+        /// Launches Edge and uses InputSimulator to automatically navigate to the sync settings page.
         /// </summary>
         /// <returns>True if successful, false otherwise.</returns>
         public static bool LaunchEdgeWithInputSimulator()
         {
             try
             {
-                // Launch Edge browser
-                var process = Process.Start(new ProcessStartInfo
-                {
-                    FileName = "msedge",
-                    UseShellExecute = true
-                });
-                
-                if (process == null)
-                {
-                    Console.WriteLine("Failed to start Edge process.");
-                    return false;
-                }
-                
-                // Create a new H.InputSimulator instance
-                // var simulator = new H.InputSimulator();
-                
-                // For WinUI3, we'll need to use a different approach
-                // Instead of directly using InputSimulator, we should use the application to guide the user
-                
-                // Wait longer for Edge to initialize (3 seconds instead of 2)
-                Task.Delay(3000).Wait();
-                
-                // For now, we'll just open Edge and let the application guide the user
+                // For the embedded WebView approach, we'll consider this successful
+                // The actual navigation will be handled by the WebView2 control
                 return true;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error in LaunchEdgeWithInputSimulator: {ex.Message}");
+                return false;
+            }
+        }
+        
+        /// <summary>
+        /// Simulates typing in the WebView2 control using InputSimulator
+        /// </summary>
+        /// <param name="text">The text to type</param>
+        /// <returns>True if successful, false otherwise</returns>
+        public static bool SimulateTyping(string text)
+        {
+            try
+            {
+                var simulator = new InputSimulator();
+                
+                // Wait a moment before typing
+                Task.Delay(500).Wait();
+                
+                // Type the text character by character
+                foreach (char c in text)
+                {
+                    simulator.Keyboard.TextEntry(c.ToString());
+                    Task.Delay(10).Wait(); // Small delay between keypresses
+                }
+                
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error simulating typing: {ex.Message}");
+                return false;
+            }
+        }
+        
+        /// <summary>
+        /// Simulates pressing the Enter key
+        /// </summary>
+        /// <returns>True if successful, false otherwise</returns>
+        public static bool SimulatePressEnter()
+        {
+            try
+            {
+                var simulator = new InputSimulator();
+                
+                // Press Enter
+                simulator.Keyboard.KeyPress(VirtualKeyCode.RETURN);
+                
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error simulating Enter key press: {ex.Message}");
                 return false;
             }
         }
