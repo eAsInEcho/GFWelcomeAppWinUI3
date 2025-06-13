@@ -45,7 +45,7 @@
                 </StackPanel>
                 
                 <StackPanel Grid.Row="1">
-                    <TextBlock Text="Request your SecurID RSA token for secure VPN access to company resources" 
+                    <TextBlock Text="RSA Token App" 
                                Style="{StaticResource SubHeaderTextStyle}"
                                Foreground="{StaticResource VpnBrush}"/>
                 
@@ -70,12 +70,10 @@
                             CornerRadius="4">
                         <TextBlock Style="{StaticResource BodyTextStyle}" Margin="0">
                             This step is REQUIRED if you will be working remote at any time.
-                            <LineBreak/>
-                            <LineBreak/>
                             You can skip this step if you will always be in office.
                             <LineBreak/>
                             <LineBreak/>
-                            RSA tokens are used to log in with VPN on your computer which allows you to access internal resources when working remotely.
+                            This installs an app that generates a revolving six-digit code you will need every time you connect with VPN.
                         </TextBlock>
                     </Border>
               
@@ -93,25 +91,74 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <!-- Step 1 -->
-                        <Border Grid.Row="0" Grid.Column="0" Width="6" Height="20" Background="{StaticResource VpnBrush}" Margin="0,5,0,5"/>
-                        <TextBlock Grid.Row="0" Grid.Column="1" Text="Submit Request Ticket using the button below" Margin="10,5,0,5"/>
+                        <Border Grid.Row="0" Grid.Column="0"
+                                Width="24" Height="24"
+                                Background="{StaticResource VpnBrush}" CornerRadius="12" Margin="0,5,0,5"
+                                VerticalAlignment="Top">
+                                                <TextBlock Text="1"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Foreground="White"
+                                       FontWeight="Bold"/>
+                                            </Border>
+                                            <TextBlock Grid.Row="0" Grid.Column="1"
+                                   Text="Click the button below to open the RSA request"
+                                   VerticalAlignment="Top" Margin="10,5,0,5"/>
 
-                        <!-- Step 2 -->
-                        <Border Grid.Row="1" Grid.Column="0" Width="6" Height="20" Background="{StaticResource VpnBrush}" Margin="0,5,0,5"/>
-                        <TextBlock Grid.Row="1" Grid.Column="1" Text="Choose 'New RSA Token' as request type" Margin="10,5,0,5"/>
-                        
-                        <!-- Step 3 -->
-                        <Border Grid.Row="2" Grid.Column="0" Width="6" Height="20" Background="{StaticResource VpnBrush}" Margin="0,5,0,5"/>
-                        <TextBlock Grid.Row="2" Grid.Column="1" Text="Select your preferred operating system" Margin="10,5,0,5"/>
-                        
-                        <!-- Step 4 -->
-                        <Border Grid.Row="3" Grid.Column="0" Width="6" Height="20" Background="{StaticResource VpnBrush}" Margin="0,5,0,5"/>
-                        <TextBlock Grid.Row="3" Grid.Column="1" Text="Look for email instructions within 48 hours" Margin="10,5,0,5"/>
+                                            <Border Grid.Row="1" Grid.Column="0"
+                                Width="24" Height="24"
+                                Background="{StaticResource VpnBrush}"
+                                CornerRadius="12"
+                                Margin="0,5,0,5"
+                                VerticalAlignment="Top">
+                                                <TextBlock Text="2"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Foreground="White"
+                                       FontWeight="Bold"/>
+                                            </Border>
+                                            <TextBlock Grid.Row="1" Grid.Column="1"
+                                   Text="Choose 'New RSA Token' as the request type"
+                                   VerticalAlignment="Top"
+                                   Margin="10,5,0,5"/>
+
+                                            <Border Grid.Row="2" Grid.Column="0"
+                                Width="24" Height="24"
+                                Background="{StaticResource VpnBrush}"
+                                CornerRadius="12"
+                                Margin="0,5,0,5"
+                                VerticalAlignment="Top">
+                                                <TextBlock Text="3"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Foreground="White"
+                                       FontWeight="Bold"/>
+                                            </Border>
+                                            <TextBlock Grid.Row="2" Grid.Column="1"
+                                   Text="Select your preferred operating system:&#x0a;Windows to have the app on your computer or iOS/Android for your phone"
+                                   VerticalAlignment="Top"
+                                   Margin="10,5,0,5"/>
+
+                                            <Border Grid.Row="3" Grid.Column="0"
+                                Width="24" Height="24"
+                                Background="{StaticResource VpnBrush}"
+                                CornerRadius="12"
+                                Margin="0,5,0,5"
+                                VerticalAlignment="Top">
+                                                <TextBlock Text="4"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Foreground="White"
+                                       FontWeight="Bold"/>
+                                            </Border>
+                                        <TextBlock Grid.Row="3" Grid.Column="1"
+                                   Text="Look for email instructions within 48 hours"
+                                   VerticalAlignment="Top"
+                                   Margin="10,5,0,5"/>
                     </Grid>
 
                     <Button x:Name="OpenServicePortalButton" 
-                            Content="Open RSA token request for VPN" 
+                            Content="RSA Request Ticket" 
                             Click="OpenServicePortalButton_Click"
                             Background="{StaticResource VpnBrush}"
                             Foreground="White"
@@ -120,11 +167,6 @@
                             FontWeight="SemiBold"
                             HorizontalAlignment="Left"
                             Margin="0,0,0,30"/>
-
-                    <TextBlock Text="Request Steps:" 
-                               FontWeight="SemiBold" 
-                               Foreground="{StaticResource VpnBrush}"
-                               Margin="0,10,0,10"/>
 
                     <Border Background="{StaticResource GFYellowBrush}" 
                             BorderThickness="0" 

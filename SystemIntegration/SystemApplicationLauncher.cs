@@ -417,8 +417,51 @@ namespace GFSetupWizard.App.WinUI3.SystemIntegration
         {
             try
             {
-                // For the embedded WebView approach, we'll consider this successful
-                // The actual navigation will be handled by the WebView2 control
+                // Kill any running instances of Edge first
+                try
+                {
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = "taskkill",
+                        Arguments = "/F /IM msedge.exe",
+                        UseShellExecute = false,
+                        CreateNoWindow = true
+                    }).WaitForExit(2000);
+                    
+                    // Small delay to ensure processes are fully terminated
+                    Thread.Sleep(1000);
+                }
+                catch (Exception killEx)
+                {
+                    Console.WriteLine($"Error killing Edge processes (non-critical): {killEx.Message}");
+                    // Continue even if we couldn't kill existing processes
+                }
+                
+                // Launch Edge with specific profile
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = "msedge.exe",
+                    Arguments = "--profile-directory=\"Profile X\" edge://settings/profiles",
+                    UseShellExecute = true
+                });
+                
+                // Give Edge time to fully initialize
+                Thread.Sleep(2000);
+                
+                // Use input simulator to navigate to the correct page
+                var simulator = new InputSimulator();
+                
+                // Focus the address bar (Ctrl+L)
+                simulator.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_L);
+                Thread.Sleep(500);
+                
+                // Type the URL
+                SimulateTyping("edge://settings/profiles");
+                Thread.Sleep(500);
+                
+                // Press Enter
+                SimulatePressEnter();
+                
                 return true;
             }
             catch (Exception ex)

@@ -5,8 +5,8 @@
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <RootNamespace>GFSetupWizard.App.WinUI3</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <Platforms>AnyCPU</Platforms>
-    <RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
+    <Platforms>x64;AnyCPU</Platforms>
+    <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
     <PublishProfile>win10-$(Platform).pubxml</PublishProfile>
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
@@ -15,9 +15,9 @@
     <AssemblyName>GFSetupWizard</AssemblyName>
     <PublishSingleFile>true</PublishSingleFile>
     <SelfContained>true</SelfContained>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugType>embedded</DebugType>
-    <EnableDefaultPageItems>false</EnableDefaultPageItems>
+    <EnableDefaultPageItems>true</EnableDefaultPageItems>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 	  <WindowsSdkPackageVersion>10.0.19041.38</WindowsSdkPackageVersion>
@@ -26,7 +26,7 @@
 
   <ItemGroup>
     <PackageReference Include="InputSimulator" Version="1.0.4" />
-    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2903.40" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3296.44" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.7.250606001" />
     <PackageReference Include="Microsoft.Windows.CsWinRT" Version="2.2.0" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.4188" />
@@ -42,18 +42,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Include="App.xaml">
+    <ApplicationDefinition Include="App.xaml" Generator="MSBuild:Compile">
       <Link>WinUI3\App.xaml</Link>
-    </Page>
-    <Page Include="MainWindow.xaml" />
-    <Page Include="Views\WelcomeStepView.xaml" />
-    <Page Include="Views\OneDriveSetupStepView.xaml" />
-    <Page Include="Views\OutlookSetupStepView.xaml" />
-    <Page Include="Views\TeamsSetupStepView.xaml" />
-    <Page Include="Views\EdgeSetupStepView.xaml" />
-    <Page Include="Views\VpnSetupStepView.xaml" />
-    <Page Include="Views\SoftwareSetupStepView.xaml" />
-    <Page Include="Views\FinalSummaryStepView.xaml" />
+    </ApplicationDefinition>
   </ItemGroup>
 
   <ItemGroup>

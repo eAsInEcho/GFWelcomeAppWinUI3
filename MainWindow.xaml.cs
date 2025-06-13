@@ -14,30 +14,19 @@ namespace GFSetupWizard.App.WinUI3
     /// </summary>
     public sealed partial class MainWindow : Window
     {
-        // UI elements
-        private Grid mainGrid;
-        private Grid navGrid;
-        private ContentControl stepContentControl;
-        private Button backButton;
-        private Button nextButton;
-        private ProgressBar stepProgressBar;
-        private CheckBox autoRunCheckbox;
-        
         // Navigation state
         private int currentStepIndex = 0;
         private List<Type> stepViewTypes;
         
         public MainWindow()
         {
+            this.InitializeComponent();
             Title = "GlobalFoundries Setup Wizard";
             
             // Initialize step types
             InitializeStepViewTypes();
             
-            // Create UI
-            CreateMainLayout();
-            
-            // Show first step
+            // Navigate to first step
             NavigateToStep(0);
             
             // Set window size
@@ -59,35 +48,59 @@ namespace GFSetupWizard.App.WinUI3
             };
         }
         
-        private void CreateMainLayout()
+        private ContentControl StepContent;
+        private ProgressBar StepProgress;
+        private Button BackButton;
+        private Button NextButton;
+        private CheckBox AutoRunCheckbox;
+        
+        private UIElement CreateMainLayout()
         {
             try
             {
-                // Main grid with rows for navigation and content
-                mainGrid = new Grid();
+                // Create main grid with three rows
+                Grid mainGrid = new Grid();
+                mainGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
                 mainGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
                 mainGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
                 mainGrid.Background = new SolidColorBrush(Colors.White);
                 
-                // Content area for step views
-                stepContentControl = new ContentControl
+                // Header with GF branding
+                Border header = new Border
                 {
+                    Background = new SolidColorBrush(Colors.Orange),
+                    Padding = new Thickness(20, 10, 20, 10)
+                };
+                
+                TextBlock headerText = new TextBlock
+                {
+                    Text = "GlobalFoundries Setup Wizard",
+                    FontSize = 20,
+                    Foreground = new SolidColorBrush(Colors.White)
+                };
+                
+                header.Child = headerText;
+                Grid.SetRow(header, 0);
+                mainGrid.Children.Add(header);
+                
+                // Content area
+                StepContent = new ContentControl
+                {
+                    Margin = new Thickness(20),
                     HorizontalAlignment = HorizontalAlignment.Stretch,
                     VerticalAlignment = VerticalAlignment.Stretch,
                     HorizontalContentAlignment = HorizontalAlignment.Stretch,
                     VerticalContentAlignment = VerticalAlignment.Stretch
                 };
                 
-                Grid.SetRow(stepContentControl, 0);
-                mainGrid.Children.Add(stepContentControl);
+                Grid.SetRow(StepContent, 1);
+                mainGrid.Children.Add(StepContent);
                 
-                // Navigation bar at bottom
-                navGrid = new Grid
+                // Navigation bar
+                Grid navGrid = new Grid
                 {
                     Padding = new Thickness(20, 10, 20, 10),
-                    Background = new SolidColorBrush(Colors.WhiteSmoke),
-                    BorderThickness = new Thickness(0, 1, 0, 0),
-                    BorderBrush = new SolidColorBrush(Colors.LightGray)
+                    Background = new SolidColorBrush(Colors.LightGray)
                 };
                 
                 navGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
@@ -95,64 +108,73 @@ namespace GFSetupWizard.App.WinUI3
                 navGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
                 
                 // Back button
-                backButton = new Button
+                BackButton = new Button
                 {
                     Content = "Back",
                     Margin = new Thickness(0, 0, 10, 0),
                     IsEnabled = false
                 };
-                backButton.Click += BackButton_Click;
-                Grid.SetColumn(backButton, 0);
-                navGrid.Children.Add(backButton);
+                BackButton.Click += BackButton_Click;
+                Grid.SetColumn(BackButton, 0);
+                navGrid.Children.Add(BackButton);
                 
                 // Progress bar
-                stepProgressBar = new ProgressBar
+                StepProgress = new ProgressBar
                 {
                     Minimum = 0,
-                    Maximum = stepViewTypes.Count - 1,
+                    Maximum = stepViewTypes != null ? stepViewTypes.Count - 1 : 7,
                     Value = 0,
                     Margin = new Thickness(10, 0, 10, 0),
                     HorizontalAlignment = HorizontalAlignment.Stretch,
                     VerticalAlignment = VerticalAlignment.Center
                 };
-                Grid.SetColumn(stepProgressBar, 1);
-                navGrid.Children.Add(stepProgressBar);
+                Grid.SetColumn(StepProgress, 1);
+                navGrid.Children.Add(StepProgress);
                 
                 // Next button
-                nextButton = new Button
+                NextButton = new Button
                 {
                     Content = "Next",
                     Margin = new Thickness(10, 0, 0, 0)
                 };
-                nextButton.Click += NextButton_Click;
-                Grid.SetColumn(nextButton, 2);
-                navGrid.Children.Add(nextButton);
+                NextButton.Click += NextButton_Click;
+                Grid.SetColumn(NextButton, 2);
+                navGrid.Children.Add(NextButton);
+                
+                Grid.SetRow(navGrid, 2);
+                mainGrid.Children.Add(navGrid);
                 
                 // Auto-run checkbox
-                autoRunCheckbox = new CheckBox
+                AutoRunCheckbox = new CheckBox
                 {
                     Content = "Run this wizard at startup",
-                    Margin = new Thickness(20, 10, 0, 0),
+                    Margin = new Thickness(20, 10, 20, 10),
                     IsChecked = false
                 };
-                autoRunCheckbox.Checked += AutoRunCheckbox_Checked;
-                autoRunCheckbox.Unchecked += AutoRunCheckbox_Unchecked;
+                AutoRunCheckbox.Checked += AutoRunCheckbox_Checked;
+                AutoRunCheckbox.Unchecked += AutoRunCheckbox_Unchecked;
                 
                 // Add a separate row for the checkbox
                 mainGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-                Grid.SetRow(autoRunCheckbox, 2);
-                mainGrid.Children.Add(autoRunCheckbox);
+                Grid.SetRow(AutoRunCheckbox, 3);
+                mainGrid.Children.Add(AutoRunCheckbox);
                 
-                // Add navigation bar to main grid
-                Grid.SetRow(navGrid, 1);
-                mainGrid.Children.Add(navGrid);
-                
-                // Set main grid as window content
-                Content = mainGrid;
+                return mainGrid;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error creating main layout: {ex.Message}");
+                
+                // Create a simple fallback UI with error message
+                Grid errorGrid = new Grid();
+                TextBlock errorText = new TextBlock
+                {
+                    Text = "Error loading UI. Please restart the application.",
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
+                };
+                errorGrid.Children.Add(errorText);
+                return errorGrid;
             }
         }
         
@@ -167,23 +189,23 @@ namespace GFSetupWizard.App.WinUI3
                 UserControl stepView = (UserControl)Activator.CreateInstance(stepViewTypes[index]);
                 
                 // Set as content
-                stepContentControl.Content = stepView;
+                StepContent.Content = stepView;
                 
                 // Update navigation state
                 currentStepIndex = index;
-                stepProgressBar.Value = index;
+                StepProgress.Value = index;
                 
                 // Configure back button
-                backButton.IsEnabled = index > 0;
+                BackButton.IsEnabled = index > 0;
                 
                 // Configure next button
                 if (index == stepViewTypes.Count - 1)
                 {
-                    nextButton.Content = "Finish";
+                    NextButton.Content = "Finish";
                 }
                 else
                 {
-                    nextButton.Content = "Next";
+                    NextButton.Content = "Next";
                 }
             }
             catch (Exception ex)

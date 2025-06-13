@@ -60,7 +60,7 @@
                         
                         <!-- Globe image as celebratory element -->
                         <Image Grid.Column="1" 
-                               Source="ms-appx:///Resources/Images/New_GF_icons_Globe_ylw.png" 
+                               Source="ms-appx:///Resources/Images/New_GF_icons_Globe_wht.png" 
                                Width="80" 
                                Height="80" 
                                Margin="10,0,0,0"/>
@@ -114,7 +114,7 @@
                                         HorizontalAlignment="Left"/>
                                 
                                 <Button x:Name="OpenRsaRequestButton" 
-                                        Content="RSA Request" 
+                                        Content="RSA Request Ticket" 
                                         Click="OpenRsaRequestButton_Click"
                                         Background="{StaticResource GFPurpleBrush}"
                                         Foreground="White"
@@ -125,7 +125,7 @@
                                         HorizontalAlignment="Left"/>
                                 
                                 <Button x:Name="OpenSoftwareRequestButton" 
-                                        Content="Request Software" 
+                                        Content="Request Software Ticket" 
                                         Click="OpenSoftwareRequestButton_Click"
                                         Background="{StaticResource GFPurpleBrush}"
                                         Foreground="White"
@@ -150,13 +150,13 @@
                                        Margin="0,0,0,10"
                                        TextAlignment="Center"
                                        HorizontalAlignment="Center"/>
-                            
+
                             <TextBlock TextWrapping="Wrap" 
                                        Margin="0,0,0,10"
                                        TextAlignment="Center">
                                 If you need assistance with any IT-related issues, please contact:
                             </TextBlock>
-                            
+
                             <StackPanel HorizontalAlignment="Center" Margin="0,0,0,0">
                                 <TextBlock Margin="0,10,0,0" TextAlignment="Center">
                                     <Run FontWeight="SemiBold">Global Service Desk:</Run>
@@ -165,18 +165,6 @@
                             </StackPanel>
                         </StackPanel>
                     </Border>
-                    
-                    <!-- Finish button -->
-                    <Button x:Name="FinishButton" 
-                            Content="Finish" 
-                            Click="FinishButton_Click"
-                            Background="{StaticResource GFOrangeBrush}"
-                            Foreground="White"
-                            Padding="15,10"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            HorizontalAlignment="Center"
-                            Margin="0,20,0,0"/>
                 </StackPanel>
             </Grid>
         </ScrollViewer>

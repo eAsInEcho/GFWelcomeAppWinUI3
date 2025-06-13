@@ -108,7 +108,7 @@
                                        FontWeight="Bold"/>
                         </Border>
                         <TextBlock Grid.Row="1" Grid.Column="1" 
-                                   Text="The Edge profile sync page will appear in the embedded browser below" 
+                                   Text="Once Edge launches, wait a few moments for the page to correctly load" 
                                    VerticalAlignment="Center" 
                                    Margin="10,5,0,5"/>
 
@@ -142,7 +142,7 @@
                                        FontWeight="Bold"/>
                         </Border>
                         <TextBlock Grid.Row="3" Grid.Column="1" 
-                                   Text="Alternately, click the Copy Sync Settings button instead and paste the address in Edge" 
+                                   Text="Alternately, click the Copy Sync URL button instead and paste the address in Edge" 
                                    VerticalAlignment="Center" 
                                    Margin="10,5,0,5"/>
                     </Grid>
@@ -150,7 +150,7 @@
                     <!-- Button Stack Panel -->
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
                     <Button x:Name="LaunchEdgeButton" 
-                                Content="Launch Edge Sync" 
+                                Content="Launch Edge" 
                                 Click="LaunchEdgeButton_Click"
                                 Background="{StaticResource GFEdgeBrush}"
                                 Foreground="White"
@@ -161,7 +161,7 @@
                                 Margin="0,0,10,0"/>
 
                         <Button x:Name="CheckStatusButton" 
-                                Content="Copy Sync Settings URL" 
+                                Content="Copy Sync URL" 
                                 Click="CheckStatusButton_Click"
                                 Background="{StaticResource GFPurpleBrush}"
                                 Foreground="White"
@@ -172,11 +172,7 @@
                                 Margin="0,0,0,0"/>
                     </StackPanel>
                     
-                    <!-- WebView2 Control -->
-                    <WebView2 x:Name="EdgeWebView" 
-                             Visibility="Collapsed"
-                             Height="400"
-                             Margin="0,0,0,30"/>
+                    <!-- No WebView control needed for the direct Edge launch approach -->
                 </StackPanel>
             </Grid>
         </ScrollViewer>

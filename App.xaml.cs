@@ -17,8 +17,7 @@ namespace GFSetupWizard.App.WinUI3
         
         public App()
         {
-            // In WinUI3, we don't need to call InitializeComponent explicitly
-            // when the XAML compilation system isn't fully set up
+            this.InitializeComponent();
             Debug.WriteLine("App constructor called");
         }
 
