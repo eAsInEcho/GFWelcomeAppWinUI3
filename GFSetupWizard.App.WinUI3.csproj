@@ -42,9 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml" Generator="MSBuild:Compile">
-      <Link>WinUI3\App.xaml</Link>
-    </ApplicationDefinition>
+    <ApplicationDefinition Include="App.xaml" Generator="MSBuild:Compile"/>
   </ItemGroup>
 
   <ItemGroup>
