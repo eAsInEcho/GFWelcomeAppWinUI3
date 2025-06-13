@@ -5,8 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using GFSetupWizard.App.WinUI3.SystemIntegration;
-using H.InputSimulator;
-using H.InputSimulator.Core.Native;
 
 namespace GFSetupWizard.App.WinUI3.Views
 {
@@ -43,12 +41,10 @@ namespace GFSetupWizard.App.WinUI3.Views
                 // Give Edge time to fully initialize before simulating typing
                 Thread.Sleep(2000);
                 
-                // Create input simulator
-                var simulator = new InputSimulator();
-                
-                // Focus the address bar using Ctrl+L
+                // Focus the address bar using Ctrl+L via our direct Windows API method
                 System.Diagnostics.Debug.WriteLine("Sending Ctrl+L to focus address bar");
-                simulator.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_L);
+                // Use our native SendKeyboardShortcut method
+                SystemApplicationLauncher.SendKeyboardShortcut(0x11, 0x4C); // CTRL+L
                 
                 // Small delay to ensure address bar is focused
                 Thread.Sleep(500);

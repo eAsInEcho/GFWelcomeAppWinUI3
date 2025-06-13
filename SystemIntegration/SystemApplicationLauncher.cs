@@ -5,8 +5,6 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
-using H.InputSimulator;
-using H.InputSimulator.Core.Native;
 
 namespace GFSetupWizard.App.WinUI3.SystemIntegration
 {
@@ -409,8 +407,80 @@ namespace GFSetupWizard.App.WinUI3.SystemIntegration
             }
         }
         
+        #region Native Input Methods
+
+        // Constants for INPUT structure
+        private const int INPUT_MOUSE = 0;
+        private const int INPUT_KEYBOARD = 1;
+        private const int INPUT_HARDWARE = 2;
+        private const uint KEYEVENTF_EXTENDEDKEY = 0x0001;
+        private const uint KEYEVENTF_KEYUP = 0x0002;
+        private const uint KEYEVENTF_UNICODE = 0x0004;
+        private const uint KEYEVENTF_SCANCODE = 0x0008;
+
+        // Virtual key codes
+        private const int VK_CONTROL = 0x11;
+        private const int VK_L = 0x4C;
+        private const int VK_RETURN = 0x0D;
+
+        // INPUT structure for SendInput
+        [StructLayout(LayoutKind.Sequential)]
+        private struct INPUT
+        {
+            public int type;
+            public InputUnion u;
+        }
+
+        [StructLayout(LayoutKind.Explicit)]
+        private struct InputUnion
+        {
+            [FieldOffset(0)]
+            public MOUSEINPUT mi;
+            [FieldOffset(0)]
+            public KEYBDINPUT ki;
+            [FieldOffset(0)]
+            public HARDWAREINPUT hi;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        private struct MOUSEINPUT
+        {
+            public int dx;
+            public int dy;
+            public uint mouseData;
+            public uint dwFlags;
+            public uint time;
+            public IntPtr dwExtraInfo;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        private struct KEYBDINPUT
+        {
+            public ushort wVk;
+            public ushort wScan;
+            public uint dwFlags;
+            public uint time;
+            public IntPtr dwExtraInfo;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        private struct HARDWAREINPUT
+        {
+            public uint uMsg;
+            public ushort wParamL;
+            public ushort wParamH;
+        }
+
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern uint SendInput(uint nInputs, INPUT[] pInputs, int cbSize);
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetMessageExtraInfo();
+
+        #endregion
+
         /// <summary>
-        /// Launches Edge and uses InputSimulator to automatically navigate to the sync settings page.
+        /// Launches Edge and uses direct Windows API to automatically navigate to the sync settings page.
         /// </summary>
         /// <returns>True if successful, false otherwise.</returns>
         public static bool LaunchEdgeWithInputSimulator()
@@ -448,11 +518,10 @@ namespace GFSetupWizard.App.WinUI3.SystemIntegration
                 // Give Edge time to fully initialize
                 Thread.Sleep(2000);
                 
-                // Use input simulator to navigate to the correct page
-                var simulator = new InputSimulator();
+                // Use direct Windows API to navigate to the correct page
                 
                 // Focus the address bar (Ctrl+L)
-                simulator.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_L);
+                SendKeyboardShortcut(VK_CONTROL, VK_L);
                 Thread.Sleep(500);
                 
                 // Type the URL
@@ -472,7 +541,105 @@ namespace GFSetupWizard.App.WinUI3.SystemIntegration
         }
         
         /// <summary>
-        /// Simulates typing in the WebView2 control using InputSimulator
+        /// Sends a keyboard shortcut using the Windows API
+        /// </summary>
+        /// <param name="modifierKey">The modifier key (e.g., Ctrl, Alt, Shift)</param>
+        /// <param name="key">The key to press</param>
+        /// <returns>True if successful</returns>
+        public static bool SendKeyboardShortcut(int modifierKey, int key)
+        {
+            try
+            {
+                // Press modifier key down
+                INPUT[] inputs = new INPUT[4];
+                
+                // Modifier key down
+                inputs[0] = new INPUT
+                {
+                    type = INPUT_KEYBOARD,
+                    u = new InputUnion
+                    {
+                        ki = new KEYBDINPUT
+                        {
+                            wVk = (ushort)modifierKey,
+                            wScan = 0,
+                            dwFlags = 0,
+                            time = 0,
+                            dwExtraInfo = GetMessageExtraInfo()
+                        }
+                    }
+                };
+                
+                // Key down
+                inputs[1] = new INPUT
+                {
+                    type = INPUT_KEYBOARD,
+                    u = new InputUnion
+                    {
+                        ki = new KEYBDINPUT
+                        {
+                            wVk = (ushort)key,
+                            wScan = 0,
+                            dwFlags = 0,
+                            time = 0,
+                            dwExtraInfo = GetMessageExtraInfo()
+                        }
+                    }
+                };
+                
+                // Key up
+                inputs[2] = new INPUT
+                {
+                    type = INPUT_KEYBOARD,
+                    u = new InputUnion
+                    {
+                        ki = new KEYBDINPUT
+                        {
+                            wVk = (ushort)key,
+                            wScan = 0,
+                            dwFlags = KEYEVENTF_KEYUP,
+                            time = 0,
+                            dwExtraInfo = GetMessageExtraInfo()
+                        }
+                    }
+                };
+                
+                // Modifier key up
+                inputs[3] = new INPUT
+                {
+                    type = INPUT_KEYBOARD,
+                    u = new InputUnion
+                    {
+                        ki = new KEYBDINPUT
+                        {
+                            wVk = (ushort)modifierKey,
+                            wScan = 0,
+                            dwFlags = KEYEVENTF_KEYUP,
+                            time = 0,
+                            dwExtraInfo = GetMessageExtraInfo()
+                        }
+                    }
+                };
+                
+                uint result = SendInput((uint)inputs.Length, inputs, Marshal.SizeOf(typeof(INPUT)));
+                
+                if (result != inputs.Length)
+                {
+                    Console.WriteLine($"SendInput failed with error code {Marshal.GetLastWin32Error()}");
+                    return false;
+                }
+                
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error sending keyboard shortcut: {ex.Message}");
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Simulates typing in a control using the Windows API
         /// </summary>
         /// <param name="text">The text to type</param>
         /// <returns>True if successful, false otherwise</returns>
@@ -480,15 +647,56 @@ namespace GFSetupWizard.App.WinUI3.SystemIntegration
         {
             try
             {
-                var simulator = new InputSimulator();
-                
                 // Wait a moment before typing
                 Task.Delay(500).Wait();
                 
                 // Type the text character by character
                 foreach (char c in text)
                 {
-                    simulator.Keyboard.TextEntry(c.ToString());
+                    INPUT[] inputs = new INPUT[2];
+                    
+                    // Key down
+                    inputs[0] = new INPUT
+                    {
+                        type = INPUT_KEYBOARD,
+                        u = new InputUnion
+                        {
+                            ki = new KEYBDINPUT
+                            {
+                                wVk = 0,
+                                wScan = (ushort)c,
+                                dwFlags = KEYEVENTF_UNICODE,
+                                time = 0,
+                                dwExtraInfo = GetMessageExtraInfo()
+                            }
+                        }
+                    };
+                    
+                    // Key up
+                    inputs[1] = new INPUT
+                    {
+                        type = INPUT_KEYBOARD,
+                        u = new InputUnion
+                        {
+                            ki = new KEYBDINPUT
+                            {
+                                wVk = 0,
+                                wScan = (ushort)c,
+                                dwFlags = KEYEVENTF_UNICODE | KEYEVENTF_KEYUP,
+                                time = 0,
+                                dwExtraInfo = GetMessageExtraInfo()
+                            }
+                        }
+                    };
+                    
+                    uint result = SendInput((uint)inputs.Length, inputs, Marshal.SizeOf(typeof(INPUT)));
+                    
+                    if (result != inputs.Length)
+                    {
+                        Console.WriteLine($"SendInput failed with error code {Marshal.GetLastWin32Error()}");
+                        return false;
+                    }
+                    
                     Task.Delay(10).Wait(); // Small delay between keypresses
                 }
                 
@@ -502,17 +710,56 @@ namespace GFSetupWizard.App.WinUI3.SystemIntegration
         }
         
         /// <summary>
-        /// Simulates pressing the Enter key
+        /// Simulates pressing the Enter key using the Windows API
         /// </summary>
         /// <returns>True if successful, false otherwise</returns>
         public static bool SimulatePressEnter()
         {
             try
             {
-                var simulator = new InputSimulator();
+                INPUT[] inputs = new INPUT[2];
                 
-                // Press Enter
-                simulator.Keyboard.KeyPress(VirtualKeyCode.RETURN);
+                // Enter key down
+                inputs[0] = new INPUT
+                {
+                    type = INPUT_KEYBOARD,
+                    u = new InputUnion
+                    {
+                        ki = new KEYBDINPUT
+                        {
+                            wVk = (ushort)VK_RETURN,
+                            wScan = 0,
+                            dwFlags = 0,
+                            time = 0,
+                            dwExtraInfo = GetMessageExtraInfo()
+                        }
+                    }
+                };
+                
+                // Enter key up
+                inputs[1] = new INPUT
+                {
+                    type = INPUT_KEYBOARD,
+                    u = new InputUnion
+                    {
+                        ki = new KEYBDINPUT
+                        {
+                            wVk = (ushort)VK_RETURN,
+                            wScan = 0,
+                            dwFlags = KEYEVENTF_KEYUP,
+                            time = 0,
+                            dwExtraInfo = GetMessageExtraInfo()
+                        }
+                    }
+                };
+                
+                uint result = SendInput((uint)inputs.Length, inputs, Marshal.SizeOf(typeof(INPUT)));
+                
+                if (result != inputs.Length)
+                {
+                    Console.WriteLine($"SendInput failed with error code {Marshal.GetLastWin32Error()}");
+                    return false;
+                }
                 
                 return true;
             }
