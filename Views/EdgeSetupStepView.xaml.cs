@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using GFSetupWizard.App.WinUI3.SystemIntegration;
-using WindowsInput;
-using WindowsInput.Native;
+using H.InputSimulator;
+using H.InputSimulator.Core.Native;
 
 namespace GFSetupWizard.App.WinUI3.Views
 {

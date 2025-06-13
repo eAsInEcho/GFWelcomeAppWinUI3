@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
-using WindowsInput;
-using WindowsInput.Native;
+using H.InputSimulator;
+using H.InputSimulator.Core.Native;
 
 namespace GFSetupWizard.App.WinUI3.SystemIntegration
 {

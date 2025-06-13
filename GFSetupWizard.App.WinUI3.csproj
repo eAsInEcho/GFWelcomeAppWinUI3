@@ -7,7 +7,6 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <Platforms>x64;AnyCPU</Platforms>
     <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
-    <PublishProfile>win10-$(Platform).pubxml</PublishProfile>
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
     <WindowsPackageType>None</WindowsPackageType>
@@ -17,15 +16,14 @@
     <SelfContained>true</SelfContained>
     <PlatformTarget>x64</PlatformTarget>
     <DebugType>embedded</DebugType>
-    <EnableDefaultPageItems>true</EnableDefaultPageItems>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-	  <WindowsSdkPackageVersion>10.0.19041.38</WindowsSdkPackageVersion>
+    <WindowsSdkPackageVersion>10.0.19041.38</WindowsSdkPackageVersion>
+    <EnableDefaultPageItems>false</EnableDefaultPageItems>
   </PropertyGroup>
 
-
   <ItemGroup>
-    <PackageReference Include="InputSimulator" Version="1.0.4" />
+    <PackageReference Include="H.InputSimulator" Version="1.4.0" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3296.44" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.7.250606001" />
     <PackageReference Include="Microsoft.Windows.CsWinRT" Version="2.2.0" />
@@ -42,39 +40,38 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml" Generator="MSBuild:Compile"/>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\WelcomeStepView.xaml.cs">
-      <DependentUpon>Views\WelcomeStepView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\OneDriveSetupStepView.xaml.cs">
-      <DependentUpon>Views\OneDriveSetupStepView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\OutlookSetupStepView.xaml.cs">
-      <DependentUpon>Views\OutlookSetupStepView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\TeamsSetupStepView.xaml.cs">
-      <DependentUpon>Views\TeamsSetupStepView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\EdgeSetupStepView.xaml.cs">
-      <DependentUpon>Views\EdgeSetupStepView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\VpnSetupStepView.xaml.cs">
-      <DependentUpon>Views\VpnSetupStepView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\SoftwareSetupStepView.xaml.cs">
-      <DependentUpon>Views\SoftwareSetupStepView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\FinalSummaryStepView.xaml.cs">
-      <DependentUpon>Views\FinalSummaryStepView.xaml</DependentUpon>
-    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WelcomeStepView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OneDriveSetupStepView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OutlookSetupStepView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TeamsSetupStepView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EdgeSetupStepView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VpnSetupStepView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SoftwareSetupStepView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FinalSummaryStepView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>
