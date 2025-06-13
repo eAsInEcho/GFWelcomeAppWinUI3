@@ -9,97 +9,97 @@
     mc:Ignorable="d"
     Title="GF Setup Wizard">
 
-    <controls:Grid>
-        <controls:Grid.RowDefinitions>
-            <controls:RowDefinition Height="Auto"/>
-            <controls:RowDefinition Height="*"/>
-            <controls:RowDefinition Height="Auto"/>
-        </controls:Grid.RowDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         
         <!-- Header -->
-        <controls:Border controls:Grid.Row="0" 
+        <Border Grid.Row="0" 
                 Background="{StaticResource GFOrangeBrush}"
                 Margin="20,10,20,10">
-            <controls:Grid>
-                <controls:Grid.ColumnDefinitions>
-                    <controls:ColumnDefinition Width="Auto"/>
-                    <controls:ColumnDefinition Width="*"/>
-                </controls:Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
                 
                 <!-- GF Logo - Globe image -->
-                <controls:Image controls:Grid.Column="0"
+                <Image Grid.Column="0"
                        Width="40" 
                        Height="40" 
                        Margin="10,5,10,5"
                        Source="ms-appx:///Resources/Images/New_GF_icons_Globe_ylw.png"/>
                 
                 <!-- Title with colon graphic element -->
-                <controls:StackPanel controls:Grid.Column="1" 
+                <StackPanel Grid.Column="1" 
                             Orientation="Horizontal" 
                             VerticalAlignment="Center">
-                    <controls:TextBlock Text="GF" 
+                    <TextBlock Text="GF" 
                                FontSize="24" 
                                FontWeight="Bold" 
                                Foreground="White"/>
                     
-                    <controls:Grid Margin="10,0,0,0">
-                        <controls:Grid.RowDefinitions>
-                            <controls:RowDefinition Height="*"/>
-                            <controls:RowDefinition Height="*"/>
-                        </controls:Grid.RowDefinitions>
-                        <controls:Border controls:Grid.Row="0" 
+                    <Grid Margin="10,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" 
                                 Width="10" 
                                 Height="10" 
                                 Background="White" 
                                 Margin="0,0,0,2"/>
-                        <controls:Border controls:Grid.Row="1" 
+                        <Border Grid.Row="1" 
                                 Width="10" 
                                 Height="10" 
                                 Background="White" 
                                 Margin="0,2,0,0"/>
-                    </controls:Grid>
+                    </Grid>
                     
-                    <controls:TextBlock Text="Setup Wizard" 
+                    <TextBlock Text="Setup Wizard" 
                                FontSize="24" 
                                FontWeight="Bold" 
                                Foreground="White" 
                                Margin="10,0,0,0"/>
-                </controls:StackPanel>
-            </controls:Grid>
-        </controls:Border>
+                </StackPanel>
+            </Grid>
+        </Border>
         
         <!-- Content Area -->
-        <controls:ContentControl x:Name="StepContent" 
-                        controls:Grid.Row="1" 
+        <ContentControl x:Name="StepContent" 
+                        Grid.Row="1" 
                         Margin="20"/>
         
         <!-- Navigation Area -->
-        <controls:Grid controls:Grid.Row="2" 
+        <Grid Grid.Row="2" 
               Background="{StaticResource GFLightGreyBrush}"
               Margin="20,10,20,10">
-            <controls:Grid.ColumnDefinitions>
-                <controls:ColumnDefinition Width="*"/>
-                <controls:ColumnDefinition Width="Auto"/>
-                <controls:ColumnDefinition Width="Auto"/>
-                <controls:ColumnDefinition Width="Auto"/>
-            </controls:Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
             
-            <controls:ProgressBar x:Name="StepProgress" 
-                         controls:Grid.Column="0" 
+            <ProgressBar x:Name="StepProgress" 
+                         Grid.Column="0" 
                          Height="20" 
                          Margin="0,0,20,0"
                          Foreground="{StaticResource GFPurpleBrush}"/>
             
-            <controls:CheckBox x:Name="AutoRunCheckbox" 
-                      controls:Grid.Column="1" 
+            <CheckBox x:Name="AutoRunCheckbox" 
+                      Grid.Column="1" 
                       Content="Run at startup" 
                       VerticalAlignment="Center" 
                       Margin="0,0,20,0"
                       Checked="AutoRunCheckbox_Checked"
                       Unchecked="AutoRunCheckbox_Unchecked"/>
             
-            <controls:Button x:Name="BackButton" 
-                    controls:Grid.Column="2" 
+            <Button x:Name="BackButton" 
+                    Grid.Column="2" 
                     Content="Back" 
                     Width="100" 
                     Margin="0,0,10,0"
@@ -108,13 +108,13 @@
                     Foreground="{StaticResource GFOrangeBrush}"
                     Click="BackButton_Click"/>
             
-            <controls:Button x:Name="NextButton" 
-                    controls:Grid.Column="3" 
+            <Button x:Name="NextButton" 
+                    Grid.Column="3" 
                     Content="Next" 
                     Width="100"
                     Background="{StaticResource GFOrangeBrush}"
                     Foreground="White"
                     Click="NextButton_Click"/>
-        </controls:Grid>
-    </controls:Grid>
+        </Grid>
+    </Grid>
 </Window>

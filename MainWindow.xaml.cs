@@ -1,11 +1,16 @@
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Diagnostics;
 using GFSetupWizard.App.WinUI3.Views;
-using Microsoft.UI;
-using Microsoft.UI.Xaml.Media;
 using System.Collections.Generic;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI;
+using Windows.Foundation;
+using Microsoft.UI.Windowing;
+using Microsoft.UI.Xaml.Markup;
+using Windows.Graphics;
 
 namespace GFSetupWizard.App.WinUI3
 {
@@ -18,9 +23,15 @@ namespace GFSetupWizard.App.WinUI3
         private int currentStepIndex = 0;
         private List<Type> stepViewTypes;
         
+        private ContentControl StepContent;
+        private ProgressBar StepProgress;
+        private Button BackButton;
+        private Button NextButton;
+        private CheckBox AutoRunCheckbox;
+        
         public MainWindow()
         {
-            this.InitializeComponent();
+            Content = CreateMainLayout();
             Title = "GlobalFoundries Setup Wizard";
             
             // Initialize step types
@@ -32,27 +43,6 @@ namespace GFSetupWizard.App.WinUI3
             // Set window size
             SetWindowSize(900, 700);
         }
-        
-        private void InitializeStepViewTypes()
-        {
-            stepViewTypes = new List<Type>
-            {
-                typeof(WelcomeStepView),
-                typeof(OneDriveSetupStepView),
-                typeof(OutlookSetupStepView),
-                typeof(TeamsSetupStepView),
-                typeof(EdgeSetupStepView),
-                typeof(VpnSetupStepView),
-                typeof(SoftwareSetupStepView),
-                typeof(FinalSummaryStepView)
-            };
-        }
-        
-        private ContentControl StepContent;
-        private ProgressBar StepProgress;
-        private Button BackButton;
-        private Button NextButton;
-        private CheckBox AutoRunCheckbox;
         
         private UIElement CreateMainLayout()
         {
@@ -177,6 +167,22 @@ namespace GFSetupWizard.App.WinUI3
                 return errorGrid;
             }
         }
+        
+        private void InitializeStepViewTypes()
+        {
+            stepViewTypes = new List<Type>
+            {
+                typeof(WelcomeStepView),
+                typeof(OneDriveSetupStepView),
+                typeof(OutlookSetupStepView),
+                typeof(TeamsSetupStepView),
+                typeof(EdgeSetupStepView),
+                typeof(VpnSetupStepView),
+                typeof(SoftwareSetupStepView),
+                typeof(FinalSummaryStepView)
+            };
+        }
+        
         
         private void NavigateToStep(int index)
         {
