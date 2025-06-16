@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
@@ -19,6 +19,7 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<WindowsSdkPackageVersion>10.0.19041.38</WindowsSdkPackageVersion>
+		<ApplicationIcon>GFSetupIcon.ico</ApplicationIcon>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -36,5 +37,9 @@
 	<ItemGroup>
 		<None Remove="Resources\Images\*.png" />
 		<Content Include="Resources\Images\*.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="GFSetupIcon.ico" />
 	</ItemGroup>
 </Project>

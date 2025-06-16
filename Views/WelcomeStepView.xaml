@@ -55,8 +55,7 @@
                             Margin="0,0,0,20"
                             CornerRadius="10">
                         <TextBlock Style="{StaticResource BodyTextStyle}" Margin="0">
-                            This guide helps you quickly and easily set up your new laptop by logging in to Windows, 
-                            activating Microsoft 365 apps, and requesting VPN access.
+                            This guide helps you quickly and easily set up your new laptop by activating Microsoft 365 apps, requesting VPN access, installing printers and additional software.
                         </TextBlock>
                     </Border>
                     
@@ -71,6 +70,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -97,11 +97,15 @@
                         
                         <!-- VPN -->
                         <Border Grid.Row="4" Grid.Column="0" Width="6" Height="20" Background="{StaticResource GFOrangeBrush}" Margin="0,5,0,5"/>
-                        <TextBlock Grid.Row="4" Grid.Column="1" Text="Requesting your SecurID RSA Token for VPN" Margin="10,5,0,5"/>
+                        <TextBlock Grid.Row="4" Grid.Column="1" Text="Request your SecurID RSA Token for VPN" Margin="10,5,0,5"/>
                         
                         <!-- Software -->
                         <Border Grid.Row="5" Grid.Column="0" Width="6" Height="20" Background="{StaticResource GFOrangeBrush}" Margin="0,5,0,5"/>
-                        <TextBlock Grid.Row="5" Grid.Column="1" Text="Installing additional software" Margin="10,5,0,5"/>
+                        <TextBlock Grid.Row="5" Grid.Column="1" Text="Install or request additional software" Margin="10,5,0,5"/>
+                        
+                        <!-- Printers -->
+                        <Border Grid.Row="6" Grid.Column="0" Width="6" Height="20" Background="{StaticResource GFOrangeBrush}" Margin="0,5,0,5"/>
+                        <TextBlock Grid.Row="6" Grid.Column="1" Text="Install Office Printers" Margin="10,5,0,5"/>
                     </Grid>
                     
                     <TextBlock TextWrapping="Wrap" Margin="0,-10,0,20" FontWeight="SemiBold" Foreground="{StaticResource GFOrangeBrush}">

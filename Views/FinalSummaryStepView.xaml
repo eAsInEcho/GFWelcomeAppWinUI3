@@ -20,8 +20,8 @@
                 
                 <Border Grid.Row="0" Background="{StaticResource GFOrangeBrush}" 
                         CornerRadius="10" 
-                        Padding="20" 
-                        Margin="0,0,0,30">
+                        Padding="10" 
+                        Margin="40,0,40,30">
                     <Grid>
                         <StackPanel HorizontalAlignment="Center">
                             <!-- Header with colon graphic element -->
@@ -45,12 +45,18 @@
                                            Margin="10,0,0,0"/>
                             </StackPanel>
                             
-                            <TextBlock Text="Congratulations! You have completed the GF laptop setup process." 
+                            <TextBlock Text="Congratulations! You have completed the GF laptop setup process" 
                                        FontSize="18" 
                                        Foreground="White" 
                                        TextWrapping="Wrap" 
                                        TextAlignment="Center" 
                                        Margin="0,10,0,0"/>
+                            <TextBlock Text="Run this app again anytime from the desktop" 
+                                       FontSize="17" 
+                                       Foreground="White" 
+                                       TextWrapping="Wrap" 
+                                       TextAlignment="Center" 
+                                       Margin="0,5,0,0"/>
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -63,13 +69,14 @@
                             BorderThickness="0" 
                             CornerRadius="10" 
                             Padding="15" 
-                            Margin="0,0,0,20">
+                            Margin="90,0,90,20">
                         <StackPanel>
-                            <TextBlock Text="Important Reminder" 
+                            <TextBlock Text="REMINDER" 
                                        FontWeight="Bold" 
+                                       TextAlignment="Center"
                                        Margin="0,0,0,5"/>
                             <TextBlock TextWrapping="Wrap">
-                                REMEMBER: You MUST connect the computer to the GF network via VPN or physically in the office at least once every 90 days or else your computer will LOCK!
+                                You MUST connect the computer to the GF network via VPN or physically in the office at least once every 90 days or else your computer will LOCK!
                                 This will require Global Service Desk assistance and may call for physically going into an office or replacing the computer.
                             </TextBlock>
                         </StackPanel>
@@ -79,10 +86,10 @@
                     <Border Background="{StaticResource GFLightGreyBrush}" 
                             BorderThickness="0" 
                             CornerRadius="10" 
-                            Padding="15" 
-                            Margin="0,0,0,20">
+                            Padding="10" 
+                            Margin="40,0,40,20">
                         <StackPanel>
-                            <TextBlock Text="Important Links!" 
+                            <TextBlock Text="Important Links" 
                                        FontWeight="Bold" 
                                        Foreground="{StaticResource GFOrangeBrush}" 
                                        Margin="0,0,0,10"
@@ -95,7 +102,7 @@
                                         Click="OpenServicePortalButton_Click"
                                         Background="{StaticResource GFPurpleBrush}"
                                         Foreground="White"
-                                        Padding="15,10"
+                                        Padding="10,10"
                                         FontSize="14"
                                         FontWeight="SemiBold"
                                         Margin="0,0,10,0"
@@ -132,8 +139,8 @@
                     <Border Background="{StaticResource GFLightGreyBrush}" 
                             BorderThickness="0" 
                             CornerRadius="10" 
-                            Padding="15" 
-                            Margin="0,0,0,20">
+                            Padding="5" 
+                            Margin="90,0,90,10">
                         <StackPanel>
                             <TextBlock Text="Need Help?" 
                                        FontWeight="Bold" 

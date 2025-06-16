@@ -38,6 +38,7 @@ namespace GFSetupWizard.App.WinUI3
                 titleBar.ButtonBackgroundColor = Colors.Transparent;
                 titleBar.ButtonForegroundColor = Colors.White;
                 titleBar.ButtonHoverBackgroundColor = Microsoft.UI.ColorHelper.FromArgb(50, 255, 255, 255);
+                this.AppWindow.SetIcon("GFSetupIcon.ico");
             }
 
             // Subscribe to events
@@ -66,6 +67,7 @@ namespace GFSetupWizard.App.WinUI3
                 typeof(EdgeSetupStepView),
                 typeof(VpnSetupStepView),
                 typeof(SoftwareSetupStepView),
+                typeof(PrinterSetupStepView),
                 typeof(FinalSummaryStepView)
             };
         }
