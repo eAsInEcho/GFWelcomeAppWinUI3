@@ -26,15 +26,29 @@ namespace GFSetupWizard.App.WinUI3
         public MainWindow()
         {
             this.InitializeComponent();
-            
+
+            // Extend into title bar
+            ExtendsContentIntoTitleBar = true;
+            if (AppWindowTitleBar.IsCustomizationSupported())
+            {
+                var titleBar = this.AppWindow.TitleBar;
+                titleBar.BackgroundColor = Microsoft.UI.ColorHelper.FromArgb(255, 255, 96, 18);
+                titleBar.InactiveBackgroundColor = Microsoft.UI.ColorHelper.FromArgb(255, 255, 96, 18);
+                titleBar.ButtonBackgroundColor = Colors.Transparent;
+                titleBar.ButtonForegroundColor = Colors.White;
+                titleBar.ButtonHoverBackgroundColor = Microsoft.UI.ColorHelper.FromArgb(50, 255, 255, 255);
+            }
+            this.Activated += MainWindow_Activated;
+
             // Initialize step types
             InitializeStepViewTypes();
 
             // Navigate to first step
             NavigateToStep(0);
 
-            // Set window size
+            // Set window size and title
             SetWindowSize(900, 700);
+            SetWindowTitle("GF Setup Wizard");
         }
 
         private void InitializeStepViewTypes()
@@ -68,6 +82,7 @@ namespace GFSetupWizard.App.WinUI3
                 // Update navigation state
                 currentStepIndex = index;
                 StepProgress.Value = index;
+                StepProgress.Maximum = stepViewTypes.Count - 1;
 
                 // Configure back button
                 BackButton.IsEnabled = index > 0;
@@ -158,5 +173,34 @@ namespace GFSetupWizard.App.WinUI3
                 Debug.WriteLine($"Error setting window size: {ex.Message}");
             }
         }
-    } 
+
+        // Helper method to set window title
+        private void SetWindowTitle(string title)
+        {
+            try
+            {
+                var appWindow = this.AppWindow;
+                if (appWindow != null)
+                {
+                    appWindow.Title = title;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error setting window title: {ex.Message}");
+            }
+        }
+
+        private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
+        {
+            var dragRect = new Windows.Graphics.RectInt32
+            {
+                X = 0,
+                Y = 0,
+                Width = (int)(this.Bounds.Width - 10),
+                Height = 80
+            };
+            this.AppWindow.TitleBar.SetDragRectangles(new[] { dragRect });
+        }
+    }
 }

@@ -6,8 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
     xmlns:local="using:GFSetupWizard.App.WinUI3"
-    mc:Ignorable="d"
-    Title="GF Setup Wizard">
+    mc:Ignorable="d">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -15,24 +14,27 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
+
         <!-- Header -->
         <Border Grid.Row="0" 
                 Background="{StaticResource GFOrangeBrush}"
-                Margin="20,10,20,10">
+                Margin="0"
+                Height="50"
+                CornerRadius="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
-                
+
                 <!-- GF Logo - Globe image -->
                 <Image Grid.Column="0"
                        Width="40" 
                        Height="40" 
                        Margin="10,5,10,5"
-                       Source="ms-appx:///Resources/Images/New_GF_icons_Globe_ylw.png"/>
-                
+                       Source="ms-appx:///Resources/Images/New_GF_icons_Globe_wht.png"/>
+
                 <!-- Title with colon graphic element -->
                 <StackPanel Grid.Column="1" 
                             Orientation="Horizontal" 
@@ -41,7 +43,7 @@
                                FontSize="24" 
                                FontWeight="Bold" 
                                Foreground="White"/>
-                    
+
                     <Grid Margin="10,0,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -58,61 +60,67 @@
                                 Background="White" 
                                 Margin="0,2,0,0"/>
                     </Grid>
-                    
+
                     <TextBlock Text="Setup Wizard" 
                                FontSize="24" 
                                FontWeight="Bold" 
                                Foreground="White" 
                                Margin="10,0,0,0"/>
                 </StackPanel>
+                
+                <!-- Spacer for window controls -->
+                <Border Grid.Column="2" Width="50" Height="32"/>
             </Grid>
         </Border>
-        
+
         <!-- Content Area -->
         <ContentControl x:Name="StepContent" 
                         Grid.Row="1" 
-                        Margin="20"/>
-        
+                        Margin="0"/>
+
         <!-- Navigation Area -->
         <Grid Grid.Row="2" 
               Background="{StaticResource GFLightGreyBrush}"
-              Margin="20,10,20,10">
+              Margin="-1"
+              CornerRadius="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            
+
             <ProgressBar x:Name="StepProgress" 
                          Grid.Column="0" 
-                         Height="20" 
-                         Margin="0,0,20,0"
+                         Height="40" 
+                         Margin="10,0,5,0"
                          Foreground="{StaticResource GFPurpleBrush}"/>
-            
+
             <CheckBox x:Name="AutoRunCheckbox" 
                       Grid.Column="1" 
                       Content="Run at startup" 
                       VerticalAlignment="Center" 
-                      Margin="0,0,20,0"
+                      Margin="10,0,10,0"
                       Checked="AutoRunCheckbox_Checked"
                       Unchecked="AutoRunCheckbox_Unchecked"/>
-            
+
             <Button x:Name="BackButton" 
                     Grid.Column="2" 
                     Content="Back" 
                     Width="100" 
-                    Margin="0,0,10,0"
+                    Margin="0,2,10,2"
                     Background="White"
                     BorderBrush="{StaticResource GFOrangeBrush}"
                     Foreground="{StaticResource GFOrangeBrush}"
                     Click="BackButton_Click"/>
-            
+
             <Button x:Name="NextButton" 
                     Grid.Column="3" 
                     Content="Next" 
                     Width="100"
+                    Margin="0,2,2,2"
                     Background="{StaticResource GFOrangeBrush}"
+                    BorderBrush="{StaticResource GFOrangeBrush}"
                     Foreground="White"
                     Click="NextButton_Click"/>
         </Grid>
