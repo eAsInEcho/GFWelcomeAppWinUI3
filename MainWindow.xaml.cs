@@ -22,6 +22,7 @@ namespace GFSetupWizard.App.WinUI3
         // Navigation state
         private int currentStepIndex = 0;
         private List<Type> stepViewTypes;
+        private bool isClosing = false; // Track if window is being closed
 
         public MainWindow()
         {
@@ -38,7 +39,10 @@ namespace GFSetupWizard.App.WinUI3
                 titleBar.ButtonForegroundColor = Colors.White;
                 titleBar.ButtonHoverBackgroundColor = Microsoft.UI.ColorHelper.FromArgb(50, 255, 255, 255);
             }
+
+            // Subscribe to events
             this.Activated += MainWindow_Activated;
+            this.Closed += MainWindow_Closed;
 
             // Initialize step types
             InitializeStepViewTypes();
@@ -120,7 +124,7 @@ namespace GFSetupWizard.App.WinUI3
             else
             {
                 // This is the last step, close the application
-                Close();
+                CloseWindow();
             }
         }
 
@@ -193,14 +197,67 @@ namespace GFSetupWizard.App.WinUI3
 
         private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
         {
-            var dragRect = new Windows.Graphics.RectInt32
+            try
             {
-                X = 0,
-                Y = 0,
-                Width = (int)(this.Bounds.Width - 10),
-                Height = 80
-            };
-            this.AppWindow.TitleBar.SetDragRectangles(new[] { dragRect });
+                // Don't try to set drag rectangles if the window is closing or already closed
+                if (isClosing || this.AppWindow == null || this.AppWindow.TitleBar == null)
+                    return;
+
+                var dragRect = new Windows.Graphics.RectInt32
+                {
+                    X = 0,
+                    Y = 0,
+                    Width = (int)(this.Bounds.Width - 10),
+                    Height = 80
+                };
+
+                this.AppWindow.TitleBar.SetDragRectangles(new[] { dragRect });
+            }
+            catch (Exception ex)
+            {
+                // Silently handle the exception to prevent crashes during window disposal
+                Debug.WriteLine($"Error in MainWindow_Activated: {ex.Message}");
+            }
+        }
+
+        private void MainWindow_Closed(object sender, WindowEventArgs args)
+        {
+            try
+            {
+                // Mark that we're closing to prevent further operations
+                isClosing = true;
+
+                // Unsubscribe from events to prevent them from firing during disposal
+                this.Activated -= MainWindow_Activated;
+                this.Closed -= MainWindow_Closed;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error in MainWindow_Closed: {ex.Message}");
+            }
+        }
+
+        // Centralized method to close the window safely
+        private void CloseWindow()
+        {
+            try
+            {
+                if (!isClosing)
+                {
+                    isClosing = true;
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error closing window: {ex.Message}");
+            }
+        }
+
+        // Public method that can be called from other views
+        public void SafeClose()
+        {
+            CloseWindow();
         }
     }
 }

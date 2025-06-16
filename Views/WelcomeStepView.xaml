@@ -53,7 +53,7 @@
                     <Border Background="{StaticResource GFYellowBrush}" 
                             Padding="15" 
                             Margin="0,0,0,20"
-                            CornerRadius="4">
+                            CornerRadius="10">
                         <TextBlock Style="{StaticResource BodyTextStyle}" Margin="0">
                             This guide helps you quickly and easily set up your new laptop by logging in to Windows, 
                             activating Microsoft 365 apps, and requesting VPN access.

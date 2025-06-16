@@ -52,7 +52,7 @@
                     <Border Background="{StaticResource GFLightGreyBrush}" 
                             Padding="15" 
                             Margin="0,0,0,20"
-                            CornerRadius="4">
+                            CornerRadius="10">
                         <TextBlock Style="{StaticResource BodyTextStyle}" Margin="0">
                             Microsoft Outlook is your professional email, calendar, and contact management tool. 
                             Setting it up properly ensures you stay connected with your colleagues and clients.
@@ -155,11 +155,9 @@
                             FontWeight="SemiBold"
                             HorizontalAlignment="Left"
                             Margin="0,0,0,0"
+                            CornerRadius="10"
                             Click="LaunchOutlook_Click"/>
-                    
-                    <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
-                        Once you have completed setting up Outlook, click <Bold>Next</Bold> to continue to the next step.
-                    </TextBlock>
+
                 </StackPanel>
             </Grid>
         </ScrollViewer>

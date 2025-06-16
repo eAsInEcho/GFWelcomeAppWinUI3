@@ -10,11 +10,11 @@ namespace GFSetupWizard.App.WinUI3.Views
         {
             this.InitializeComponent();
         }
-        
+
         private async void OpenServicePortalButton_Click(object sender, RoutedEventArgs e)
         {
             bool success = SystemApplicationLauncher.OpenServicePortal();
-            
+
             if (!success)
             {
                 ContentDialog dialog = new ContentDialog
@@ -24,15 +24,15 @@ namespace GFSetupWizard.App.WinUI3.Views
                     CloseButtonText = "OK",
                     XamlRoot = this.XamlRoot
                 };
-                
+
                 await dialog.ShowAsync();
             }
         }
-        
+
         private async void OpenRsaRequestButton_Click(object sender, RoutedEventArgs e)
         {
             bool success = SystemApplicationLauncher.OpenRsaTokenRequestForVpn();
-            
+
             if (!success)
             {
                 ContentDialog dialog = new ContentDialog
@@ -42,15 +42,15 @@ namespace GFSetupWizard.App.WinUI3.Views
                     CloseButtonText = "OK",
                     XamlRoot = this.XamlRoot
                 };
-                
+
                 await dialog.ShowAsync();
             }
         }
-        
+
         private async void OpenSoftwareRequestButton_Click(object sender, RoutedEventArgs e)
         {
             bool success = SystemApplicationLauncher.OpenSoftwareRequestPortal();
-            
+
             if (!success)
             {
                 ContentDialog dialog = new ContentDialog
@@ -60,23 +60,39 @@ namespace GFSetupWizard.App.WinUI3.Views
                     CloseButtonText = "OK",
                     XamlRoot = this.XamlRoot
                 };
-                
+
                 await dialog.ShowAsync();
             }
         }
 
-    private void FinishButton_Click(object sender, RoutedEventArgs e)
-    {
-        // Use the static MainWindow property from App to close the window
-        if (App.MainWindow != null)
+        private void FinishButton_Click(object sender, RoutedEventArgs e)
         {
-            App.MainWindow.Close();
+            try
+            {
+                // Use the static MainWindow property from App to close the window safely
+                if (App.MainWindow != null && App.MainWindow is MainWindow mainWindow)
+                {
+                    mainWindow.SafeClose();
+                }
+                else
+                {
+                    // Fallback if MainWindow is not available
+                    Application.Current.Exit();
+                }
+            }
+            catch (System.Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error in FinishButton_Click: {ex.Message}");
+                // Try fallback exit
+                try
+                {
+                    Application.Current.Exit();
+                }
+                catch
+                {
+                    // If all else fails, do nothing - the user can close manually
+                }
+            }
         }
-        else
-        {
-            // Fallback if MainWindow is not available
-            Application.Current.Exit();
-        }
-    }
     }
 }

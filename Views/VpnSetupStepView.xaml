@@ -17,7 +17,7 @@
                VerticalAlignment="Top" 
                Width="400" 
                Height="400" 
-               Margin="0,0,-4,0"/>
+               Margin="0,0,-7,0"/>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <Grid Margin="20">
@@ -51,25 +51,29 @@
                 
                     <Border Background="#FFEBEE" 
                             BorderBrush="{StaticResource VpnBrush}" 
-                            BorderThickness="1" 
-                            Padding="15" 
-                            Margin="0,0,0,20"
-                            CornerRadius="4">
+                            BorderThickness="2" 
+                            Padding="10" 
+                            Margin="0,0,0,10"
+                            CornerRadius="10">
                         <TextBlock TextWrapping="Wrap" 
-                                   Foreground="{StaticResource VpnBrush}" 
-                                   FontWeight="SemiBold">
-                            IMPORTANT: This computer MUST connect to the GF network via VPN or physically in the office at least once every 90 days or it will LOCK!
+                                   Foreground="{StaticResource VpnBrush}">
+                            <Run FontWeight="Bold" FontStyle="Italic">IMPORTANT:</Run>
+                            <Run FontStyle="Italic"> This computer </Run>
+                            <Run FontWeight="Bold" FontStyle="Italic">must connect to the GF network</Run>
+                            <Run FontStyle="Italic"> via VPN or physically in the office at least once </Run>
+                            <Run FontWeight="Bold" FontStyle="Italic">every 90 days or it will LOCK!</Run>
                             <LineBreak/>
-                            This will require IT Service Desk assistance and may call for physically going into an office or replacing the computer!
+                            <LineBreak/>
+                            <Run FontStyle="Italic">This will require IT Service Desk assistance and may call for physically going into an office or replacing the computer!</Run>
                         </TextBlock>
                     </Border>
                     
                     <Border Background="{StaticResource GFLightGreyBrush}" 
-                            Padding="15" 
+                            Padding="10" 
                             Margin="0,0,0,20"
-                            CornerRadius="4">
+                            CornerRadius="10">
                         <TextBlock Style="{StaticResource BodyTextStyle}" Margin="0">
-                            This step is REQUIRED if you will be working remote at any time.
+                            This step is <Bold>REQUIRED</Bold> if you will be working remote at any time.
                             You can skip this step if you will always be in office.
                             <LineBreak/>
                             <LineBreak/>
@@ -169,17 +173,18 @@
                             Click="OpenServicePortalButton_Click"
                             Background="{StaticResource VpnBrush}"
                             Foreground="White"
-                            Padding="15,10"
+                            Padding="10,10"
                             FontSize="14"
                             FontWeight="SemiBold"
                             HorizontalAlignment="Left"
-                            Margin="0,0,0,30"/>
+                            CornerRadius="10"
+                            Margin="0,0,0,10"/>
 
                     <Border Background="{StaticResource GFYellowBrush}" 
                             BorderThickness="0" 
                             Padding="15" 
                             Margin="0,10,0,20"
-                            CornerRadius="4">
+                            CornerRadius="10">
                         <TextBlock TextWrapping="Wrap" Margin="0">
                             If you need assistance, contact the Global Service Desk at:
                             <Run FontWeight="SemiBold">+1 518-305-4357</Run>

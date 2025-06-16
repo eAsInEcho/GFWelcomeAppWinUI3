@@ -19,7 +19,7 @@
                 </Grid.RowDefinitions>
                 
                 <Border Grid.Row="0" Background="{StaticResource GFOrangeBrush}" 
-                        CornerRadius="8" 
+                        CornerRadius="10" 
                         Padding="20" 
                         Margin="0,0,0,30">
                     <Grid>
@@ -61,7 +61,7 @@
                     <!-- VPN reminder -->
                     <Border Background="{StaticResource GFYellowBrush}" 
                             BorderThickness="0" 
-                            CornerRadius="4" 
+                            CornerRadius="10" 
                             Padding="15" 
                             Margin="0,0,0,20">
                         <StackPanel>
@@ -78,7 +78,7 @@
                     <!-- Important Links section -->
                     <Border Background="{StaticResource GFLightGreyBrush}" 
                             BorderThickness="0" 
-                            CornerRadius="4" 
+                            CornerRadius="10" 
                             Padding="15" 
                             Margin="0,0,0,20">
                         <StackPanel>
@@ -99,6 +99,7 @@
                                         FontSize="14"
                                         FontWeight="SemiBold"
                                         Margin="0,0,10,0"
+                                        CornerRadius="10"
                                         HorizontalAlignment="Left"/>
                                 
                                 <Button x:Name="OpenRsaRequestButton" 
@@ -110,6 +111,7 @@
                                         FontSize="14"
                                         FontWeight="SemiBold"
                                         Margin="0,0,10,0"
+                                        CornerRadius="10"
                                         HorizontalAlignment="Left"/>
                                 
                                 <Button x:Name="OpenSoftwareRequestButton" 
@@ -120,6 +122,7 @@
                                         Padding="15,10"
                                         FontSize="14"
                                         FontWeight="SemiBold"
+                                        CornerRadius="10"
                                         HorizontalAlignment="Left"/>
                             </StackPanel>
                         </StackPanel>
@@ -128,7 +131,7 @@
                     <!-- Support information -->
                     <Border Background="{StaticResource GFLightGreyBrush}" 
                             BorderThickness="0" 
-                            CornerRadius="4" 
+                            CornerRadius="10" 
                             Padding="15" 
                             Margin="0,0,0,20">
                         <StackPanel>

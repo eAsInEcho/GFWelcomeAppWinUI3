@@ -52,7 +52,7 @@
                     <Border Background="{StaticResource GFLightGreyBrush}" 
                             Padding="15" 
                             Margin="0,0,0,0"
-                            CornerRadius="4">
+                            CornerRadius="10">
                         <TextBlock Style="{StaticResource BodyTextStyle}" Margin="0">
                             Microsoft Teams is your primary tool to connect and coordinate at GF.
                             Setting up Teams properly ensures you can work with colleagues, participate in meetings, and collaborate on projects.
@@ -129,15 +129,16 @@
                                    Margin="10,5,0,5"/>
                     </Grid>
                     <Button x:Name="LaunchTeamsButton" 
-        Content="Launch Teams" 
-        Click="LaunchTeamsButton_Click"
-        Background="{StaticResource TeamsBrush}"
-        Foreground="White"
-        Padding="15,10"
-        FontSize="14"
-        FontWeight="SemiBold"
-        HorizontalAlignment="Left"
-        Margin="0,0,0,30"/>
+                            Content="Launch Teams" 
+                            Click="LaunchTeamsButton_Click"
+                            Background="{StaticResource TeamsBrush}"
+                            Foreground="White"
+                            Padding="15,10"
+                            FontSize="14"
+                            FontWeight="SemiBold"
+                            HorizontalAlignment="Left"
+                            CornerRadius="10"
+                            Margin="0,0,0,30"/>
                 </StackPanel>
             </Grid>
         </ScrollViewer>
