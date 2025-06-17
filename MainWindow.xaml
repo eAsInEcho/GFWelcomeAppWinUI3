@@ -73,6 +73,17 @@
             </Grid>
         </Border>
 
+        <Border Grid.Row="0" Grid.RowSpan="3">
+            <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Image Source="ms-appx:///Resources/Images/New_GF_icons_World Map_purp.png" 
+                       Opacity="0.5" 
+                       Width="400" 
+                       Height="400"
+                       Canvas.Left="350"
+                       Canvas.Top="0"/>
+            </Canvas>
+        </Border>
+
         <!-- Content Area -->
         <ContentControl x:Name="StepContent" 
                         Grid.Row="1" 
@@ -90,11 +101,37 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <ProgressBar x:Name="StepProgress" 
-                         Grid.Column="0" 
-                         Height="40" 
-                         Margin="10,0,5,0"
-                         Foreground="{StaticResource GFPurpleBrush}"/>
+            <Grid Grid.Column="0" Margin="10,0,5,0" Name="ProgressContainer">
+                <!-- Background with fixed width to ensure consistency -->
+                <Border x:Name="ProgressBackground" 
+                        Background="{StaticResource GFLightGreyBrush}" 
+                        CornerRadius="10"
+                        Height="20"/>
+                        
+                <!-- Progress Fill - Fixed percentage approach -->
+                <Border x:Name="ProgressFill" 
+                        Background="{StaticResource GFPurpleBrush}" 
+                        CornerRadius="10" 
+                        HorizontalAlignment="Left"
+                        Height="20"
+                        Width="10"/>
+                        
+                <!-- Text Overlay with semi-transparent background -->
+                <Border Background="White" 
+                        Opacity="0.75"
+                        CornerRadius="5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Padding="5,0,5,0">
+                    <TextBlock x:Name="ProgressText" 
+                               Text="Step 1 of 9" 
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center" 
+                               Foreground="Black" 
+                               FontWeight="SemiBold"
+                               FontSize="10"/>
+                </Border>
+            </Grid>
 
             <CheckBox x:Name="AutoRunCheckbox" 
                       Grid.Column="1" 

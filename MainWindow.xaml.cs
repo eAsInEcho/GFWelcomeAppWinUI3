@@ -11,6 +11,7 @@ using Windows.Foundation;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml.Markup;
 using Windows.Graphics;
+using Microsoft.UI.Xaml.Media.Animation;
 
 namespace GFSetupWizard.App.WinUI3
 {
@@ -52,8 +53,31 @@ namespace GFSetupWizard.App.WinUI3
             NavigateToStep(0);
 
             // Set window size and title
-            SetWindowSize(900, 700);
+            SetWindowSize(1000, 850);
             SetWindowTitle("GF Setup Wizard");
+            SetMinimumWindowSize(1000, 700);
+        }
+
+        private void SetMinimumWindowSize(int minWidth, int minHeight)
+        {
+            try
+            {
+                var appWindow = this.AppWindow;
+                if (appWindow != null)
+                {
+                    var minSize = new Windows.Graphics.SizeInt32
+                    {
+                        Width = minWidth,
+                        Height = minHeight
+                    };
+                    // Note: WinUI3 doesn't have direct MinSize, but you can handle the SizeChanged event
+                    // to enforce minimum sizes if needed
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error setting minimum window size: {ex.Message}");
+            }
         }
 
         private void InitializeStepViewTypes()
@@ -79,20 +103,53 @@ namespace GFSetupWizard.App.WinUI3
                 if (index < 0 || index >= stepViewTypes.Count)
                     return;
 
-                // Create instance of the step view
-                UserControl stepView = (UserControl)Activator.CreateInstance(stepViewTypes[index]);
+                UserControl stepView = index switch
+                {
+                    0 => new WelcomeStepView(),
+                    1 => new OneDriveSetupStepView(),
+                    2 => new OutlookSetupStepView(),
+                    3 => new TeamsSetupStepView(),
+                    4 => new EdgeSetupStepView(),
+                    5 => new VpnSetupStepView(),
+                    6 => new SoftwareSetupStepView(),
+                    7 => new PrinterSetupStepView(),
+                    8 => new FinalSummaryStepView(),
+                    _ => throw new ArgumentOutOfRangeException(nameof(index))
+                };
 
                 // Set as content
                 StepContent.Content = stepView;
-
                 // Update navigation state
                 currentStepIndex = index;
-                StepProgress.Value = index;
-                StepProgress.Maximum = stepViewTypes.Count - 1;
 
+                // Get total steps and calculate progress ratio
+                int totalSteps = stepViewTypes.Count;
+                double progressRatio = (double)index / (double)(totalSteps - 1);
+
+                // Update progress text
+                ProgressText.Text = $"Step {index + 1} of {totalSteps}";
+
+                try
+                {
+                    // Use ProgressContainer instead of ProgressBackground for width calculation
+                    // If ActualWidth is 0, try to get Width property first, or use a default
+                    var containerWidth = ProgressContainer.ActualWidth;
+                    if (containerWidth <= 0)
+                    {
+                        containerWidth = 400; // Fallback default width
+                    }
+
+                    // Set the progress fill width - apply a minimum width for visibility
+                    ProgressFill.Width = Math.Max(10, containerWidth * progressRatio);
+
+                    Debug.WriteLine($"Progress: Step {index + 1} of {totalSteps}, Width: {ProgressFill.Width}");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error updating progress bar: {ex.Message}");
+                }
                 // Configure back button
                 BackButton.IsEnabled = index > 0;
-
                 // Configure next button
                 if (index == stepViewTypes.Count - 1)
                 {

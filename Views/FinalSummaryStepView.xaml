@@ -11,7 +11,7 @@
         </Grid.Background>
         
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <Grid Margin="20">
+            <Grid Margin="25">
                 <!-- Header with congratulatory message -->
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>

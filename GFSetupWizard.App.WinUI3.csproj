@@ -14,6 +14,9 @@
 		<AssemblyName>GFSetupWizard</AssemblyName>
 		<PublishSingleFile>true</PublishSingleFile>
 		<SelfContained>true</SelfContained>
+		<PublishTrimmed>false</PublishTrimmed>
+		<TrimMode>partial</TrimMode>
+		<SuppressTrimAnalysisWarnings>true</SuppressTrimAnalysisWarnings>
 		<PlatformTarget>x64</PlatformTarget>
 		<DebugType>embedded</DebugType>
 		<Nullable>enable</Nullable>
@@ -24,7 +27,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="H.InputSimulator" Version="1.5.0" />
-		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3296.44" />
 		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.7.250606001" />
 		<PackageReference Include="Microsoft.Windows.CsWinRT" Version="2.2.0" />
 		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.4188" />
@@ -34,6 +36,17 @@
 		<Manifest Include="$(ApplicationManifest)" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<TrimmerRootAssembly Include="GFSetupWizard.App.WinUI3" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+			<_Parameter1>IsTrimmable</_Parameter1>
+			<_Parameter2>True</_Parameter2>
+		</AssemblyAttribute>
+	</ItemGroup>
+	
 	<ItemGroup>
 		<None Remove="Resources\Images\*.png" />
 		<Content Include="Resources\Images\*.png" />
