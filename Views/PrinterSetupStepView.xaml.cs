@@ -18,20 +18,25 @@ namespace GFSetupWizard.App.WinUI3.Views
         {
             this.InitializeComponent();
         }
-        
-        private async void MaltaAustinButton_Click(object sender, RoutedEventArgs e)
+
+        private async void AustinDallasButton_Click(object sender, RoutedEventArgs e)
         {
-            await HandlePrinterLocationClick("Malta or Austin", MaltaAustinPath);
+            await HandlePrinterLocationClick("Austin-Dallas", MaltaAustinPath);
+        }
+
+        private async void MaltaNYCButton_Click(object sender, RoutedEventArgs e)
+        {
+            await HandlePrinterLocationClick("Malta-NYC", MaltaAustinPath);
+        }
+
+        private async void SantaClaraSanDiegoButton_Click(object sender, RoutedEventArgs e)
+        {
+            await HandlePrinterLocationClick("Santa Clara-San Diego", SantaClaraPath);
         }
 
         private async void BurlingtonEastFishkillButton_Click(object sender, RoutedEventArgs e)
         {
-            await HandlePrinterLocationClick("Burlington or East Fishkill", BurlingtonEastFishkillPath);
-        }
-
-        private async void SantaClaraButton_Click(object sender, RoutedEventArgs e)
-        {
-            await HandlePrinterLocationClick("Santa Clara", SantaClaraPath);
+            await HandlePrinterLocationClick("Burlington-East Fishkill", BurlingtonEastFishkillPath);
         }
 
         private async Task HandlePrinterLocationClick(string locationName, string printerPath)

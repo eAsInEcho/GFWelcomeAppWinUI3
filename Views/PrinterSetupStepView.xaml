@@ -53,7 +53,7 @@
                         <TextBlock Style="{StaticResource BodyTextStyle}" 
                                    TextWrapping="Wrap" 
                                    Margin="0">
-                            Select your location below and shortcut will be placed on your desktop for continued easy access.
+                            Select your location below and a shortcut will be placed on your desktop for continued easy access.
                         </TextBlock>
                     </StackPanel>
                 </Border>
@@ -94,9 +94,9 @@
                             HorizontalAlignment="Center"
                             Orientation="Horizontal"
                             Margin="0,0,0,10">
-                    <Button x:Name="MaltaAustinButton" 
-                            Content="Malta or Austin" 
-                            Click="MaltaAustinButton_Click"
+                    <Button x:Name="AustinDallasButton" 
+                            Content="Austin/Dallas" 
+                            Click="AustinDallasButton_Click"
                             Background="{StaticResource GFOrangeBrush}"
                             Foreground="White"
                             Padding="10,10"
@@ -116,9 +116,20 @@
                             CornerRadius="10"
                             HorizontalAlignment="Center"/>
 
-                    <Button x:Name="SantaClaraButton" 
-                            Content="Santa Clara" 
-                            Click="SantaClaraButton_Click"
+                    <Button x:Name="SantaClaraSanDiegoButton" 
+                            Content="Santa Clara/San Diego" 
+                            Click="SantaClaraSanDiegoButton_Click"
+                            Background="{StaticResource GFOrangeBrush}"
+                            Foreground="White"
+                            Padding="10,10"
+                            FontSize="14"
+                            FontWeight="SemiBold"
+                            CornerRadius="10"
+                            HorizontalAlignment="Center"/>
+
+                    <Button x:Name="MaltaNYCButton" 
+                            Content="Malta/NYC" 
+                            Click="MaltaNYCButton_Click"
                             Background="{StaticResource GFOrangeBrush}"
                             Foreground="White"
                             Padding="10,10"
